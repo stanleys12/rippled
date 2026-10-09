@@ -33,6 +33,7 @@ Version 3.5.0 is not yet released.
 
 ### Bugfixes in 3.5.0
 
+- `server_info`: `close_time_offset` is now reported as a negative number when the local clock is behind the network, instead of wrapping to a large positive value.
 - `channel_authorize`: The `channel_id` field now returns an `invalidParams` error if the value is not a string. [#7582](https://github.com/XRPLF/rippled/pull/7582)
 - `channel_verify`: The `channel_id` and `signature` fields now return an `invalidParams` error if the value is not a string. [#7582](https://github.com/XRPLF/rippled/pull/7582)
 

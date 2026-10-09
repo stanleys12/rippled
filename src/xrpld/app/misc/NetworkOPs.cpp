@@ -3141,7 +3141,7 @@ NetworkOPsImp::getServerInfo(bool human, bool admin, bool counters)
 
             if (auto const closeOffset = registry_.get().getTimeKeeper().closeOffset();
                 std::abs(closeOffset.count()) >= 60)
-                l[jss::close_time_offset] = static_cast<std::uint32_t>(closeOffset.count());
+                l[jss::close_time_offset] = static_cast<json::Int>(closeOffset.count());
 
             static constexpr std::chrono::seconds kHighAgeThreshold{1000000};
             if (ledgerMaster_.haveValidated())

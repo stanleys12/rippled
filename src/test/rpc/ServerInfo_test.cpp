@@ -154,9 +154,27 @@ admin = 127.0.0.1
     }
 
     void
+    testCloseTimeOffset()
+    {
+        testcase("close_time_offset");
+
+        using namespace test::jtx;
+        using namespace std::chrono_literals;
+
+        Env env(*this);
+        env.close();
+        BEAST_EXPECT(env.timeKeeper().adjustCloseTime(-480s) == -120s);
+
+        auto const result = env.rpc("server_info");
+        auto const& ledger = result[jss::result][jss::info][jss::validated_ledger];
+        BEAST_EXPECT(ledger[jss::close_time_offset] == -120);
+    }
+
+    void
     run() override
     {
         testServerInfo();
+        testCloseTimeOffset();
     }
 };
 
